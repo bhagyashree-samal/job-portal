@@ -74,7 +74,7 @@ export const login = async (req, res) => {
       expiresIn: "7d",
     });
 
-    const safeUser = {
+   const safeUser = {
   _id: user._id,
   fullname: user.fullname,
   email: user.email,
