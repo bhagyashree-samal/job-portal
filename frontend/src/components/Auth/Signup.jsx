@@ -8,10 +8,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { USER_API_END_POINT } from "@/utils/constant";
 import axios from "axios";
 import { toast } from "sonner";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "@/redux/authSlice";
+import { Loader2 } from "lucide-react";
+import store from "@/redux/store";
 
 const Signup = () => {
+  const {loading}=useSelector(store=>store.auth);
   const navigate=useNavigate();
+  const dispatch=useDispatch();
    const [input,setInput]=useState({
     fullname:"",
     email:"",
@@ -42,6 +47,7 @@ if(input.file){
   formData.append("file",input.file);
 }
 try{
+  dispatch(setLoading(true))
 const res=await axios.post(`${USER_API_END_POINT}/register`,formData,{
   headers:{
     "Content-Type":"multipart/form-data"
@@ -56,7 +62,9 @@ if(res.data.success){
 console.log(error);
 toast.error(error.response.data.message);
 }
-
+finally{
+  dispatch(setLoading(false));
+}
 
 
   }
@@ -80,7 +88,7 @@ toast.error(error.response.data.message);
           </div>
            <div className="my-2">
             <Label>Password</Label>
-            <Input value={input.password} name='password' onChange={changeEventHandler} type="password" placeholder="minimum 4 digit password enter" />
+            <Input   type="password" value={input.password} name='password' onChange={changeEventHandler}  autoComplete="new-password" placeholder=" password enter" />
             </div>
             <div className="flex items-center justify-between" >
               <RadioGroup className="flex items-center gap-4 my-5">
@@ -98,7 +106,10 @@ toast.error(error.response.data.message);
 <Input onChange={changefileHandler} accept="image/*" type="file" className="cursor-pointer"/>
     </div>
             </div>
-          <Button type="submit" className='w-full my-4'>Sign Up</Button>
+            {
+                       loading ? <Button className="w-full my-4"><Loader2 className="mr-2 h-4 w-4 animate-spin"/>Please wait</Button>: <Button type="submit" className='w-full my-4'>Sign Up</Button>
+                     } 
+          
           <span className="text-sm">Already have an account? <Link to="/login" className="text-blue-600">Login</Link></span>
         </form>
       </div>
