@@ -70,7 +70,7 @@ const Navbar = () => {
                     </div>
                     <div className="flex w-fit items-center gap-2 cursor-pointer">
                       <LogOut />
-                      <Link to="/profile">
+                      <Link to="/logout">
                         <Button variant="link">LogOut</Button>
                       </Link>
                     </div>
