@@ -24,11 +24,11 @@ const FilterCard = () => {
       <hr className='mt-3' />
       <RadioGroup>
          {
-        filterData.map((data,index)=>(
+        filterData.map((data)=>(
           <div>
             <h1 className='font-bold text-lg'>{data.filterType}</h1>
             {
-              data.array.map((item,index)=>{
+              data.array.map((item)=>{
                 return (
                   <div className='flex items-center space-x-2 my-2'>
                     <RadioGroupItem value={item}/>

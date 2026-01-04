@@ -6,7 +6,6 @@ import Home from "./components/Home";
 import Jobs from "./components/Jobs";
 import Browser from "./components/Browser";
 import Profile from "./components/Profile";
-import LogOut from "./components/LogOut";
 import Details from "./components/Details";
 
 const App = () => {
@@ -20,7 +19,7 @@ const App = () => {
            <Route path="/jobs" element={<Jobs />} />
           <Route path="/browser" element={<Browser />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/logout" element={<LogOut/>} />
+          
           <Route path="/description/:id" element={<Details/>} />
 
         </Routes>
