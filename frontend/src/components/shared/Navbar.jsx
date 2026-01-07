@@ -37,9 +37,21 @@ toast.success(res.data.message);
         </div>
         <div className="flex items-center gap-10">
           <ul className="flex font-medium items-center gap-5">
-            <Link to="/">Home</Link>
+            {
+              user && user.role==='recruiter' ? (
+              <>
+              <Link to="/admin/companies">Companies</Link>
+            <Link to="/admin/jobs">Jobs</Link>
+              </>
+              ):(
+                <>
+                   <Link to="/">Home</Link>
             <Link to="/jobs">Jobs</Link>
             <Link to="/browser">Browser</Link>
+            </>
+              )
+            }
+           
           </ul>
 
           {!user ? (
@@ -58,7 +70,7 @@ toast.success(res.data.message);
               <PopoverTrigger asChild>
                 <Avatar className="cursor-pointer">
                   <AvatarImage
-                    src={user?.profile?.profilePhoto}
+                    src={user?.profile?.profilePhoto ? user?.profile?.profilePhoto : "https://github.com/evilrabbit.png"}
                     alt="@shadcn"
                   />
                 </Avatar>
@@ -80,12 +92,13 @@ toast.success(res.data.message);
                     </div>
                   </div>
                   <div className="flex flex-col text-gray-600">
-                    <div className="flex w-fit items-center gap-2 cursor-pointer">
+                    { user && user.role==='student' && <div className="flex w-fit items-center gap-2 cursor-pointer">
                       <User2 />
                       <Link to="/profile">
                         <Button variant="link">View Profile</Button>
                       </Link>
-                    </div>
+                    </div>}
+                    
                     <div className="flex w-fit items-center gap-2 cursor-pointer">
                       <LogOut />
 

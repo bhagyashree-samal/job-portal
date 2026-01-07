@@ -7,6 +7,9 @@ import Jobs from "./components/Jobs";
 import Browser from "./components/Browser";
 import Profile from "./components/Profile";
 import Details from "./components/Details";
+import Companies from "./components/Companies";
+import CompanyCreate from "./components/CompanyCreate";
+import CompanySetup from "./components/CompanySetup";
 
 const App = () => {
   return (
@@ -18,9 +21,15 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
            <Route path="/jobs" element={<Jobs />} />
           <Route path="/browser" element={<Browser />} />
-          <Route path="/profile" element={<Profile />} />
-          
+          <Route path="/profile" element={<Profile />} /> 
           <Route path="/description/:id" element={<Details/>} />
+
+//admin routers 
+          <Route path="/admin/companies" element={<Companies/>} />
+           <Route path="/admin/companies/create" element={<CompanyCreate/>} />
+                      <Route path="/admin/companies/:id" element={<CompanySetup/>} />
+
+
 
         </Routes>
       </Router>
