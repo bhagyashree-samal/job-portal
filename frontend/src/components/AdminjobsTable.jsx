@@ -15,28 +15,28 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 
-const CompaniesTable = () => {
- const {companies,searchCompanyByText}=useSelector(store=>store.company);
- const[filterCompany,setFilterCompany]=useState(companies);
+const AdminjobsTable = () => {
+ const {allAdminJobs,searchJobByText}=useSelector(store=>store.job);
+ const[filterJob,setFilterJob]=useState(allAdminJobs);
   const navigate=useNavigate();
 
  useEffect(()=>{
-const filteredCompany=companies.length >=0 && companies.filter((company)=>{
-  if(!searchCompanyByText){
+const filteredCompany=allAdminJobs.length >=0 && allAdminJobs.filter((job)=>{
+  if(!searchJobByText){
     return true
   };
-  return company?.name?.toLowerCase().includes(searchCompanyByText.toLowerCase());
+  return job?.title?.toLowerCase().includes(searchJobByText.toLowerCase()) || job?.company?.name.toLowerCase().includes(searchJobByText.toLowerCase());
 })
-setFilterCompany(filteredCompany);
- },[companies,searchCompanyByText])
+setFilterJob(filteredCompany);
+ },[allAdminJobs,searchJobByText])
   return (
     <div>
       <Table>
-        <TableCaption>A list of your recent registered companies</TableCaption>
+        <TableCaption>A list of your recent posted jobs</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead>Logo</TableHead>
-            <TableHead>Name</TableHead>
+            <TableHead>Company Name</TableHead>
+            <TableHead>Role</TableHead>
             <TableHead>Date</TableHead>
             <TableHead className="text-right">Action</TableHead>
           </TableRow>
@@ -44,20 +44,14 @@ setFilterCompany(filteredCompany);
        
         <TableBody>
           {
-            filterCompany?.map((company) => (
-              <TableRow key={company._id}>
-                <TableCell>
-                  <Avatar>
-                    <AvatarImage
-                      src={company.logo || "https://via.placeholder.com/40"}
-                      alt="company logo"
-                    />
-                  </Avatar>
-                </TableCell>
+            filterJob?.map((job) => (
+              <TableRow key={job._id}>
 
-                <TableCell>{company.name}</TableCell>
+                <TableCell>{job?.company?.name}</TableCell>
+                                <TableCell>{job?.title}</TableCell>
+
                 <TableCell>
-                  {company.createdAt.split("T")[0]}
+                  {job.createdAt.split("T")[0]}
                 </TableCell>
 
                 <TableCell className="text-right cursor-pointer">
@@ -68,7 +62,7 @@ setFilterCompany(filteredCompany);
                     <PopoverContent className="w-32">
                       <div className="flex items-center gap-2 cursor-pointer">
                         <Edit2 className="w-4" />
-                        <span onClick={()=>navigate(`/admin/companies/${company._id}`)}>Edit</span>
+                        <span onClick={()=>navigate(`/admin/companies/${job._id}`)}>Edit</span>
                       </div>
                     </PopoverContent>
                   </Popover>
@@ -82,4 +76,4 @@ setFilterCompany(filteredCompany);
   );
 };
 
-export default CompaniesTable;
+export default AdminjobsTable;
