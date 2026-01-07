@@ -30,8 +30,8 @@ const PostJob = () => {
     salary: "",
     location: "",
     jobType: "",
-    experience: "",
-    position: 0,
+   experience: "",
+    position: '',
     companyId: "",
   });
 
@@ -110,7 +110,7 @@ const PostJob = () => {
             <div>
               <Label>Salary</Label>
               <Input
-                type="text"
+                type="number"
                 name="salary"
                 value={input.salary}
                 onChange={changeEventHandler}
