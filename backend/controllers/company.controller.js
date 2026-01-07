@@ -1,4 +1,6 @@
 import { Company } from "../models/company.model.js";
+import cloudinary from "../utils/cloudinary.js";
+import getDataUri from "../utils/datauri.js";
 
 export const registerCompany = async (req, res) => {
   try {
@@ -10,6 +12,7 @@ export const registerCompany = async (req, res) => {
       });
     }
     let company = await Company.findOne({ name: companyName });
+
     if (company) {
       return res.status(400).json({
         message: "You can't register same company",
@@ -73,7 +76,12 @@ export const updateCompany = async (req, res) => {
     const { name, description, website, location } = req.body;
     const file = req.file;
 
-    const updateData = { name, description, website, location };
+    //cloudinary
+    const fileuri=getDataUri(file);
+const cloudResponse=await cloudinary.uploader.upload(fileuri.content);
+const logo=cloudResponse.secure_url;
+
+    const updateData = { name, description, website, location,logo };
     const company = await Company.findByIdAndUpdate(req.params.id, updateData, {
       new: true,
     });
@@ -82,7 +90,7 @@ export const updateCompany = async (req, res) => {
         message: "Companies not found",
         success: false,
       });
-    }
+    } 
     return res.status(200).json({
       message: "company information updated",
       success: true,
