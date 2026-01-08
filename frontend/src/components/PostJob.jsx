@@ -31,7 +31,7 @@ const PostJob = () => {
     location: "",
     jobType: "",
    experience: "",
-    position: '',
+    position:"",
     companyId: "",
   });
 

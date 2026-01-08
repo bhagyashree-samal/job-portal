@@ -12,6 +12,7 @@ import CompanyCreate from "./components/CompanyCreate";
 import CompanySetup from "./components/CompanySetup";
 import Adminjobs from "./components/Adminjobs";
 import PostJob from "./components/PostJob";
+import Applicants from "./components/Applicants";
 
 const App = () => {
   return (
@@ -21,21 +22,19 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-           <Route path="/jobs" element={<Jobs />} />
+          <Route path="/jobs" element={<Jobs />} />
           <Route path="/browser" element={<Browser />} />
-          <Route path="/profile" element={<Profile />} /> 
-          <Route path="/description/:id" element={<Details/>} />
-
-//admin routers 
-          <Route path="/admin/companies" element={<Companies/>} />
-           <Route path="/admin/companies/create" element={<CompanyCreate/>} />
-                      <Route path="/admin/companies/:id" element={<CompanySetup/>} />
-                      <Route path="/admin/jobs" element={<Adminjobs/>} />
-                      <Route path="/admin/jobs" element={<Adminjobs/>} />
-                      <Route path="/admin/jobs/create" element={<PostJob/>} />
-
-
-
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/description/:id" element={<Details />} />
+          //admin routers
+          <Route path="/admin/companies" element={<Companies />} />
+          <Route path="/admin/companies/create" element={<CompanyCreate />} />
+          <Route path="/admin/companies/:id" element={<CompanySetup />} />
+          <Route path="/admin/jobs" element={<Adminjobs />} />
+          <Route path="/admin/jobs" element={<Adminjobs />} />
+          <Route path="/admin/jobs/create" element={<PostJob />} />
+          <Route path="/admin/jobs/:id/applicants" element={<Applicants />} />
+    
         </Routes>
       </Router>
     </div>
