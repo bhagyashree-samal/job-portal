@@ -8,11 +8,13 @@ import { Label } from './ui/label'
 import AppliedJobTable from './AppliedJobTable'
 import UpdateProfileDialog from './UpdateProfileDialog'
 import { useSelector } from 'react-redux'
+import useGetAppliedJobs from '@/hooks/useGetAppliedJobs'
 
 // const Skills=["Html" , "Css" ,"JavaScript","ReactJs"]
   const isResume=true;
 
 const Profile = () => {
+  useGetAppliedJobs();
   const [open,setOpen]=useState(false);
   const { user } = useSelector((store) => store.auth);
 
@@ -23,7 +25,8 @@ const Profile = () => {
         <div className='flex justify-between'>
         <div className='flex items-center gap-4'>
  <Avatar className="h-24 w-24">
-          <AvatarImage src="https://banner2.cleanpng.com/20190129/icq/kisspng-logo-vector-graphics-graphic-design-i-can-design-a-professional-logo-for-5-seoclerk-5c5094ce54d461.0727217315487848463475.jpg" alt="no img"/>
+          <AvatarImage src={user?.profile?.profilePhoto ? user?.profile?.profilePhoto : "https://github.com/evilrabbit.png"}
+ alt="no img"/>
         </Avatar>
         <div>
           <h1 className='font-medium text-xl'>{user?.fullname}</h1>
