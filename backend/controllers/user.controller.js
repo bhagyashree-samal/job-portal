@@ -164,15 +164,12 @@ let skillsArray;
     if(bio) user.profile.bio=bio
     if(skills) user.profile.skills=skillsArray
     
-    
-
 //resume comes later here...
 if(cloudResponse){
 user.profile.resume = inlinePdfUrl;
  // save the cloudinary uri
   user.profile.resumeOriginalName=file.originalname //save the original file name
 }
-
     await user.save(); 
 
 user = {
